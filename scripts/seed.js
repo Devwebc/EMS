@@ -10,42 +10,72 @@ const __dirname = path.dirname(__filename);
 const dbConfigPath = path.join(__dirname, '../database.yaml');
 const dbConfig = yaml.load(fs.readFileSync(dbConfigPath, 'utf8'));
 
-const {
-  'sqlite_path': sqlitePath,
-} = dbConfig;
+const { 'sqlite_path': sqlitePath } = dbConfig;
 
 const db = new sqlite3.Database(sqlitePath);
 
 const employees = [
   {
-    full_name: 'John Doe'
+    full_name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone_number: '123-456-7890',
+    date_of_birth: '1990-05-15',
+    job_title: 'Software Engineer',
+    department: 'Engineering',
+    salary: 75000,
+    start_date: '2020-06-01',
+    end_date: null,
+    photo_path: null,
+    document_path: null,
   },
   {
-    full_name: 'Jane Smith'
+    full_name: 'Jane Smith',
+    email: 'jane.smith@example.com',
+    phone_number: '987-654-3210',
+    date_of_birth: '1985-09-22',
+    job_title: 'HR Manager',
+    department: 'Human Resources',
+    salary: 65000,
+    start_date: '2018-04-15',
+    end_date: null,
+    photo_path: null,
+    document_path: null,
   },
   {
-    full_name: 'Alice Johnson'
+    full_name: 'Alice Johnson',
+    email: 'alice.johnson@example.com',
+    phone_number: '555-789-1234',
+    date_of_birth: '1992-07-30',
+    job_title: 'Marketing Specialist',
+    department: 'Marketing',
+    salary: 55000,
+    start_date: '2019-09-10',
+    end_date: null,
+    photo_path: null,
+    document_path: null,
   },
 ];
 
 const timesheets = [
   {
     employee_id: 1,
-    start_time: '2025-02-10 08:00:00',
-    end_time: '2025-02-10 17:00:00',
+    start_time: '2025-02-10 10:00',
+    end_time: '2025-02-10 11:00',
+    summary: 'Developed new feature for client dashboard.',
   },
   {
     employee_id: 2,
-    start_time: '2025-02-11 12:00:00',
-    end_time: '2025-02-11 17:00:00',
+    start_time: '2025-02-11 10:00',
+    end_time: '2025-02-11 11:00',
+    summary: 'Conducted interviews for software engineering candidates.',
   },
   {
     employee_id: 3,
-    start_time: '2025-02-12 07:00:00',
-    end_time: '2025-02-12 16:00:00',
+    start_time: '2025-02-12 10:00',
+    end_time: '2025-02-12 11:00',
+    summary: 'Worked on a new marketing campaign strategy.',
   },
 ];
-
 
 const insertData = (table, data) => {
   const columns = Object.keys(data[0]).join(', ');
@@ -72,4 +102,3 @@ db.close(err => {
     console.log('Database seeded successfully.');
   }
 });
-
